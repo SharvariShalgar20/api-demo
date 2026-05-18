@@ -1,10 +1,12 @@
 package com.sharvari.crudDemo.service;
 
 import com.sharvari.crudDemo.model.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Service
 public class ProductService {
 
     private final Map<Long, Product> store = new HashMap<>();
