@@ -1,0 +1,20 @@
+Step 1 — Build the JAR with Maven
+
+mvn clean package -DskipTests
+
+Step 2 — Create the Dockerfile
+
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY target/crud-demo.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
+Step 3 — Build the Docker Image
+
+docker build -t crud-demo .
+
+Step 4 — Run the Container
+
+docker run -p 8080:8080 crud-demo
