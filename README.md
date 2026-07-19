@@ -1,17 +1,17 @@
-### Spring Boot - Creating api (CRUD operation) - Simple product management with Spring boot
+# Spring Boot - Creating api (CRUD operation) - Simple product management with Spring boot
 
 A simple and robust RESTful API built using Spring Boot to manage products. This project demonstrates full CRUD (Create, Read, Update, Delete) capabilities, clean architecture, and deployment practices.
 
 ---
 
-## Features
+### Features
 
 *   **Create Product:** Add new products with details (ID, name, price, quantity, etc.).
 *   **Read Product:** Retrieve all products or search for a specific product by its ID.
 *   **Update Product:** Modify existing product details seamlessly.
 *   **Delete Product:** Remove products from the inventory.
 
-## Tech Stack
+### Tech Stack
 
 *   **Backend:** Java, Spring Boot (Spring Web, Spring Data JPA)
 *   **Database:** H2 (In-Memory) / MySQL *(Adjust based on your setup)*
@@ -19,7 +19,7 @@ A simple and robust RESTful API built using Spring Boot to manage products. This
 
 ---
 
-## Deployment
+### Deployment
 
 This application is deployed and hosted on an **AWS EC2 (Elastic Compute Cloud)** instance. 
 
@@ -31,7 +31,7 @@ This application is deployed and hosted on an **AWS EC2 (Elastic Compute Cloud)*
 
 ---
 
-## API Endpoints
+### API Endpoints
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
