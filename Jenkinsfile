@@ -29,8 +29,9 @@ pipeline {
         stage('Run App') {
             steps {
                 bat """
-                    for /f "tokens=5" %%p in ('netstat -aon ^| findstr :%APP_PORT%') do taskkill /F /PID %%p 2>nul
+                    for /f "tokens=5" %%p in ('netstat -aon ^| findstr :%APP_PORT% ^| findstr LISTENING') do taskkill /F /PID %%p 2>nul
                     start "crud-demo" /B java -jar target\\%JAR_NAME% > app.log 2>&1
+                    exit /b 0
                 """
             }
         }
@@ -59,7 +60,8 @@ pipeline {
                     input message: 'App is up and verified. Stop it now?', ok: 'Stop it'
                 }
                 bat """
-                    for /f "tokens=5" %%p in ('netstat -aon ^| findstr :%APP_PORT%') do taskkill /F /PID %%p
+                    for /f "tokens=5" %%p in ('netstat -aon ^| findstr :%APP_PORT% ^| findstr LISTENING') do taskkill /F /PID %%p
+                    exit /b 0
                 """
             }
         }
