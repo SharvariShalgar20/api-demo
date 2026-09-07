@@ -38,8 +38,17 @@ pipeline {
         stage('Health Check') {
             steps {
                 bat """
-                    timeout /t 5
-                    curl -s -o NUL -w "%%{http_code}" http://localhost:%APP_PORT%/api/products
+                    setlocal enabledelayedexpansion
+                    set STATUS=000
+                    for /L %%i in (1,1,10) do (
+                        ping -n 3 127.0.0.1 >nul
+                        for /f %%c in ('curl -s -o NUL -w "%%{http_code}" http://localhost:%APP_PORT%/api/products') do set STATUS=%%c
+                        if "!STATUS!"=="200" goto :done
+                        echo Waiting for app... attempt %%i, status !STATUS!
+                    )
+                    :done
+                    echo Final status: !STATUS!
+                    if not "!STATUS!"=="200" exit /b 1
                 """
             }
         }
@@ -58,10 +67,10 @@ pipeline {
 
     post {
         success {
-            echo 'Pipeline finished successfully.'
+            echo '✅ Pipeline finished successfully.'
         }
         failure {
-            echo 'Pipeline failed. Check the logs above.'
+            echo '❌ Pipeline failed. Check the logs above.'
         }
     }
 }
